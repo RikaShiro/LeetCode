@@ -1,19 +1,19 @@
-const quickSort = (A, low, high) => {
+function quickSort(A, low, high) {
 	if (low >= high) return
-	const idx = partition(A, low, high)
+	const idx = partition()
 	quickSort(A, low, idx - 1)
 	quickSort(A, idx + 1, high)
 
-	function partition(A, low, high) {
+	function partition() {
 		const pivot = A[high]
 		let i = low
 		for (let j = low; j < high; j++) {
 			if (A[j] < pivot) {
-				[A[i], A[j]] = [A[j], A[i]]
+				;[A[i], A[j]] = [A[j], A[i]]
 				i++
 			}
 		}
-		[A[i], A[high]] = [A[high], A[i]]
+		;[A[i], A[high]] = [A[high], A[i]]
 		return i
 	}
 }
