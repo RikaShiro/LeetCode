@@ -1,3 +1,4 @@
-const x = 9
-console.log(x | 0)
-console.log(x || 0)
+const x = 10
+console.log(x.toString(2))
+console.log(x & 1)
+console.log(x >> 1)
