@@ -1,3 +1,2 @@
-const x = 'aaaa'
-x[0] = 'b'
-console.log(x)
+const s = 'Hello World'
+console.log(s.substring(s.length-5))
