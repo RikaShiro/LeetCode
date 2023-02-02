@@ -1,5 +1,5 @@
 const x = {
-	left: 1,
-	right: 0
+	1: 'a',
+	2: 'b'
 }
-console.log(x)
+console.log(x[3])
