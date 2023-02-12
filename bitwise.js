@@ -1,4 +1,3 @@
-const x = 10
-console.log(x.toString(2))
-console.log(x & 1)
-console.log(x >> 1)
+let [x, y, z] = [100, 12, null]
+z = x ^ y
+console.log(x ^ z, y ^ z)
