@@ -1,0 +1,505 @@
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solve = function (board) {
+	const M = board
+	const directions = [
+		[-1, 0],
+		[0, -1],
+		[1, 0],
+		[0, 1]
+	]
+	const row = M.length
+	const col = M[0].length
+	for (let i = 0; i < row; i++) {
+		for (let j = 0; j < col; j++) {
+			if (M[i][j] === 'O') {
+				BFS(i, j)
+			}
+		}
+	}
+	for (let i = 0; i < row; i++) {
+		for (let j = 0; j < col; j++) {
+			if (M[i][j] === 'A') {
+				M[i][j] = 'O'
+			}
+		}
+	}
+
+	function BFS(x, y) {
+		let isBounded = true
+		M[x][y] = 'A'
+		const q = [[x, y]]
+		const visited = []
+		while (q.length > 0) {
+			const [x, y] = q.shift()
+			visited.push([x, y])
+			for (const [dx, dy] of directions) {
+				const [nx, ny] = [x + dx, y + dy]
+				if (withinBoard(nx, ny)) {
+					if (M[nx][ny] === 'O') {
+						q.push([nx, ny])
+						M[nx][ny] = 'A'
+					}
+				} else {
+					isBounded = false
+				}
+			}
+		}
+		if (isBounded) {
+			for (const [x, y] of visited) {
+				M[x][y] = 'X'
+			}
+		}
+
+		function withinBoard(x, y) {
+			return x >= 0 && x < row && y >= 0 && y < col
+		}
+	}
+}
+
+const board = [
+	[
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X'
+	],
+	[
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X'
+	],
+	[
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X',
+		'X',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'X',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O'
+	],
+	[
+		'X',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O'
+	],
+	[
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O',
+		'O'
+	],
+	[
+		'X',
+		'O',
+		'O',
+		'O',
+		'O',
+		'X',
+		'O',
+		'O',
+		'O',
+		'X',
+		'X',
+		'O',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'X',
+		'O',
+		'O'
+	]
+]
+solve(board)
+console.log(board)
