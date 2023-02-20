@@ -1,3 +1,3 @@
 const A = [1, 2, 3, 4]
-A.filter((x) => x % 2 === 0)
+A.push(...[1, 2, 3])
 console.log(A)
