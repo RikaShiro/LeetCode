@@ -1,4 +1,4 @@
-class Heap {
+module.exports = class Heap {
 	constructor(data = [], compare = (a, b) => a - b) {
 		this.data = data
 		this.compare = compare
@@ -6,8 +6,8 @@ class Heap {
 	}
 
 	heapify() {
-		if (this.size() < 2) return
-		for (let i = 1; i < this.size(); i++) {
+		const n = this.size()
+		for (let i = 1; i < n; i++) {
 			this.up(i)
 		}
 	}
@@ -17,8 +17,8 @@ class Heap {
 		return this.data[0]
 	}
 
-	push(value) {
-		this.data.push(value)
+	push(x) {
+		this.data.push(x)
 		this.up(this.size() - 1)
 	}
 
@@ -26,18 +26,19 @@ class Heap {
 		if (this.size() === 0) {
 			return null
 		}
-		const result = this.data[0]
-		const last = this.data.pop()
+		const res = this.data[0]
+		const tail = this.data.pop()
 		if (this.size() !== 0) {
-			this.data[0] = last
+			this.data[0] = tail
 			this.down(0)
 		}
-		return result
+		return res
 	}
 
 	up(i) {
 		while (i > 0) {
 			const parent = Math.floor((i - 1) / 2)
+			// swap i and its parent; if i is smaller than it
 			if (this.compare(this.data[i], this.data[parent]) < 0) {
 				this.swap(i, parent)
 				i = parent
@@ -53,6 +54,7 @@ class Heap {
 			const left = i * 2 + 1
 			const right = i * 2 + 2
 			let j = i
+			// swap i and its smallest child; if i is larger than it
 			if (left < n && this.compare(this.data[left], this.data[j]) < 0) {
 				j = left
 			}
@@ -74,5 +76,9 @@ class Heap {
 
 	size() {
 		return this.data.length
+	}
+
+	empty() {
+		return this.data.length === 0
 	}
 }
