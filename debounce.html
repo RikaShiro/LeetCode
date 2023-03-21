@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>debounce</title>
+  </head>
+  <body>
+    <input id="debounce-input" placeholder="防抖输入框"/>
+    <script>
+      const input = document.getElementById('debounce-input')
+      const handleInputOnChange = (event) => {
+        console.log(event, 'send request')
+      }
+      input.oninput = debounce(handleInputOnChange, 1000)
+
+      function debounce(func, wait) {
+        let id = 0
+        return function(...args) {
+          if (id) {
+            clearTimeout(id)
+          }
+          id = setTimeout(() => {
+            func.apply(this, args)
+          }, wait)
+        }
+      }
+    </script>
+  </body>
+</html>

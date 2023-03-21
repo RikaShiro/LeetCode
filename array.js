@@ -1,2 +1,6 @@
-const A = Array.from()
-console.log(A)
+const a = [...'123'].map(Number)
+console.log(a)
+
+function modify(s) {
+  return s + '1'
+}
