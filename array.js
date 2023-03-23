@@ -1,6 +1,1 @@
-const a = [...'123'].map(Number)
-console.log(a)
-
-function modify(s) {
-  return s + '1'
-}
+console.log(0.1 + 0.2 === 0.3)
